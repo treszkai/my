@@ -1,6 +1,6 @@
 # My Python utilities
 
-The standard `pickle` module of Python expects a file object as an argument, not a filename. Let's make life convenient `\o/` 
+The standard `pickle` module of Python expects a file object as an argument, not a filename. Let's make life convenient and [spare myself 10 seconds a hundred times a year](https://xkcd.com/1205/) `\o/` 
 
 For now, `my` package contains:
  - `my.dump(obj, filename)`, to Pickle dump an object to a file, specified by a filename
