@@ -2,7 +2,7 @@
 
 The standard `pickle` module of Python expects a file object as an argument, not a filename. Let's make life convenient and [spare myself 10 seconds a hundred times a year](https://xkcd.com/1205/) `\o/` 
 
-For now, `my` package contains:
+`my` package contains:
  - `my.dump(obj, filename)`, to Pickle dump an object to a file, specified by a filename
  - `my.load(filename)`, to Pickle load an object from a file, specified by a filename
  - `my.load_or_do(filename, func)`, to Pickle load an object from a file if the file exists,
@@ -10,6 +10,7 @@ For now, `my` package contains:
 
 ## Demos
 
+My Pickle dump and load:
 ```python
 import my
 
@@ -19,6 +20,7 @@ x = my.load('shrugs.pickle')
 assert x == shrugs
 ```
 
+My Pickle load or do:
 ```python
 func_called = 0
 def calc_big():
