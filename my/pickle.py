@@ -14,6 +14,7 @@ def load(filename: str, *args, **kwargs):
 
     return obj
 
+
 def load_or_do(filename, func):
     """Load a stored object or assign the return value if the file can't be unpickled"""
     try:

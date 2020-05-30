@@ -4,10 +4,6 @@ T = TypeVar('T')
 U = TypeVar('U')
 
 
-def filterNotNone(seq):
-    return (x for x in seq if x is not None)
-
-
 def maybe(f: Callable[[Optional[T]], U]) -> Callable[[Optional[T]], Optional[U]]:
     """Haskell’s fmap function for the Maybe type class
 

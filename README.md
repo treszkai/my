@@ -7,6 +7,7 @@ The standard `pickle` module of Python expects a file object as an argument, not
  - `my.load(filename)`, to Pickle load an object from a file, specified by a filename
  - `my.load_or_do(filename, func)`, to Pickle load an object from a file if the file exists,
    or pickle the return value of `func()` under `filename` otherwise.
+ - `my.maybe(func)`, which applies `func()` on non-`None` values, and returns `None` othewise. 
 
 ## Demos
 
@@ -34,4 +35,17 @@ assert func_called == 1
 m = my.load_or_do('number.pickle', calc_big)
 assert func_called == 1
 assert n == m
+```
+
+My maybe:
+```python
+from my import maybe
+
+s = '12'
+n = maybe(int)(s)      # 12
+sq = maybe(square)(n)  # 144
+
+s = 'foo'
+n = maybe(int)(s)      # None (ValueError suppressed)
+sq = maybe(square)(n)  # None
 ```
