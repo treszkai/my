@@ -20,7 +20,7 @@ def load_or_do(filename, func):
     try:
         with open(filename, 'rb') as f:
             obj = pickle.load(f)
-    except (FileNotFoundError, EOFError, pickle.UnpicklingError):
+    except Exception:
         obj = func()
         with open(filename, 'wb') as f:
             pickle.dump(obj, f)
