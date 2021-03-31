@@ -49,3 +49,13 @@ s = 'foo'
 n = maybe(int)(s)      # None (ValueError suppressed)
 sq = maybe(square)(n)  # None
 ```
+
+My `math`:
+
+```python
+from my import math
+
+math.sin(math.pi / 4) == math.dsin(45)   # True
+math.r(90) == math.pi / 2                # True
+```
+
