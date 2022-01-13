@@ -22,7 +22,7 @@ class TestMyMock(TestCase):
         self.assertTrue(m.foo.bar())
         self.assertFalse(m.foo.baz())
 
-        self.assertMethodTrue(m, ".foo.baz()")
+        self.assertMethodTrue(m, ".foo.bar()")
 
         with self.assertRaises(AssertionError):
             self.assertMethodTrue(m, ".foo.baz()")
