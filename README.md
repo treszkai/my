@@ -59,3 +59,10 @@ math.sin(math.pi / 4) == math.dsin(45)   # True
 math.r(90) == math.pi / 2                # True
 ```
 
+My `rot13`:
+
+```python
+from my import rot13
+
+rot13('abzABZ 123') == 'nomNOM 123'
+```
