@@ -17,7 +17,7 @@ The `my.gil` module was written in C, therefore needs to be built with:
 python setup.py build
 ```
 
-Then copy the resulting `build/*/gil.*.so` file to `my/`.
+Then copy the resulting `build/*/gil.*.so` file to the `my/` package.
 
 ## Demos
 
@@ -77,7 +77,7 @@ from my import rot13
 rot13('abzABZ 123') == 'nomNOM 123'
 ```
 
-My `acquire_gil`:
+My `acquire_gil` (only available on certain platforms):
 
 ```python
 from my import acquire_gil

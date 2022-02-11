@@ -1,9 +1,18 @@
 import threading
 import time
 
-import my
+import pytest
 
 
+try:
+    import my.gil
+
+    MY_GIL_FOUND = True
+except ImportError:
+    MY_GIL_FOUND = False
+
+
+@pytest.mark.skipif(not MY_GIL_FOUND, reason="Compiled my.gil module is not available")
 def test_acquire_gil():
 
     class T(threading.Thread):
