@@ -1,5 +1,5 @@
 """
-Tired of repeating the argparse chore? My.argparse to the rescue!
+Tired of repeating the argparse chore? my.argparse to the rescue!
 
 Previously, you had to write:
     import argparse
@@ -22,8 +22,8 @@ Or, if you're feeling reckless:
     add_argument('--foo')
     print(args.foo)
 
-Isn't it beautiful?
-...
+Isn't it beautiful? ...
+
 No! Because now you're manipulating a state which shouldn't exist
 by most standards. Even though parser.parse_args() implicitly
 plucks the command-line arguments from sys.argv, this simplified

@@ -1,13 +1,23 @@
 # My Python utilities
 
-The standard `pickle` module of Python expects a file object as an argument, not a filename. Let's make life convenient and [spare myself 10 seconds a hundred times a year](https://xkcd.com/1205/) `\o/` 
+The standard `pickle` module of Python expects a file object as an argument, not a filename. Let’s make life convenient and [spare myself 10 seconds a hundred times a year](https://xkcd.com/1205/) `\o/` 
 
 `my` package contains:
  - `my.dump(obj, filename)`, to Pickle dump an object to a file, specified by a filename
  - `my.load(filename)`, to Pickle load an object from a file, specified by a filename
  - `my.load_or_do(filename, func)`, to Pickle load an object from a file if the file exists,
    or pickle the return value of `func()` under `filename` otherwise.
- - `my.maybe(func)`, which applies `func()` on non-`None` values, and returns `None` othewise. 
+ - `my.maybe(func)`, which applies `func()` on non-`None` values, and returns `None` othewise.
+
+## Building the package
+
+The `my.gil` module was written in C, therefore needs to be built with:
+
+```shell
+python setup.py build
+```
+
+Then copy the resulting `build/*/gil.*.so` file to `my/`.
 
 ## Demos
 
@@ -65,4 +75,12 @@ My `rot13`:
 from my import rot13
 
 rot13('abzABZ 123') == 'nomNOM 123'
+```
+
+My `acquire_gil`:
+
+```python
+from my import acquire_gil
+
+acquire_gil(2)  # Acquires the GIL and holds it for 2 seconds
 ```
