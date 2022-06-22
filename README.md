@@ -84,3 +84,16 @@ from my import acquire_gil
 
 acquire_gil(2)  # Acquires the GIL and holds it for 2 seconds
 ```
+
+My `jupyter` widgets:
+
+```python
+from my import jupyter
+
+# in a Jupyter cell
+l = jupyter.Leafer(range(10,20,3)); l()
+
+# in another cell
+[l.data[i] for i in l.marked_idxs]
+```
+
