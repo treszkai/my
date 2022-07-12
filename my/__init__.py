@@ -11,3 +11,9 @@ try:
 except ImportError:
     pass
 
+try:
+    from .pandas import *
+except ImportError:
+    # The pandas module imports the pandas package, which might not be installed
+    pass
+

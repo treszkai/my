@@ -97,3 +97,15 @@ l = jupyter.Leafer(range(10,20,3)); l()
 [l.data[i] for i in l.marked_idxs]
 ```
 
+My `pandas` `DataFrame` accessor `Q` (just a shorthand for `query`):
+
+```python
+>>> import pandas as pd
+>>> import my
+>>> df = pd.DataFrame([[0,1],[2,3]], columns=['A','B'])
+>>> a = 2
+>>> df.Q['A == @a']
+    A  B
+ 1  2  3
+```
+
