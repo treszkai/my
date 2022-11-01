@@ -9,9 +9,11 @@ The standard `pickle` module of Python expects a file object as an argument, not
    or pickle the return value of `func()` under `filename` otherwise.
  - `my.maybe(func)`, which applies `func()` on non-`None` values, and returns `None` othewise.
 
+This package requires Python 3.10 or later.
+
 ## Building the package
 
-The `my.gil` module was written in C, therefore needs to be built with:
+The `my.gil` module was written in C, therefore needs to be _built_ with:
 
 ```shell
 python setup.py build
