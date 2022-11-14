@@ -1,4 +1,4 @@
-from itertools import pairwise
+from itertools import chain, pairwise
 from pathlib import Path
 import subprocess
 import select
@@ -26,7 +26,7 @@ def read_clipboard() -> str:
 def read_text() -> list[str]:
     """Read text either from stdin or from clipboard, whichever comes first"""
     initial_clipboard = read_clipboard()
-    print('Enter text (or copy to clipboard):')
+    print('Enter text or copy to clipboard:')
 
     while True:
         i, o, e = select.select([sys.stdin], [], [], 1)
@@ -47,11 +47,9 @@ def read_text() -> list[str]:
 
 def process_lines(raw_lines: list[str], words: set[str]) -> str:
     lines = []
-
-    line2 = None
     use_space = True
 
-    for line1, line2 in pairwise(raw_lines):
+    for line1, line2 in pairwise(chain(raw_lines, [''])):
         if line1.endswith("-"):
             word1 = line1.split()[-1]
             word2 = line2.split()[0]
@@ -65,9 +63,6 @@ def process_lines(raw_lines: list[str], words: set[str]) -> str:
         else:
             add_line(line1, lines, use_space)
             use_space = True
-
-    if line2:
-        add_line(line2, lines, use_space)
 
     return ' '.join(lines)
 
