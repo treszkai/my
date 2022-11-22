@@ -16,14 +16,15 @@ def compare_ratios(a: float | tuple[int, int], b: float | tuple[int, int]):
             b_success, b_total = b
             return st.beta.sf(a, b_success + 1, b_total - b_success + 1)
         case ((int(), int()), float()):
-            return 1 - compare_ratios(b, a)
+            a_success, a_total = a
+            return st.beta.cdf(b, a_success + 1, a_total - a_success + 1)
         case ((int(), int()), (int(), int())):
             a_success, a_total = a
             b_success, b_total = b
-            return 1 - integrate.quad(
+            return integrate.quad(
                 lambda x: (
-                    st.beta.pdf(x, a_success + 1, a_total - a_success + 1)
-                    * st.beta.cdf(x, b_success + 1, b_total - b_success + 1)
+                    st.beta.pdf(x, b_success + 1, b_total - b_success + 1)
+                    * st.beta.cdf(x, a_success + 1, a_total - a_success + 1)
                 ),
                 0.0,
                 1.0,

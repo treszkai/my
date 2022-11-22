@@ -21,7 +21,13 @@ def test_compare_ratios_float_tuple():
     assert compare_ratios((1, 30), 0.9) > 0.99
     assert compare_ratios((7, 10), 0.6) == approx(0.30, abs=0.01)
 
+    assert compare_ratios((0, 10), .5) > 0.99, "shall not fail on extremes"
+    assert compare_ratios((10, 10), .5) < 0.01, "shall not fail on extremes"
+
 
 def test_compare_ratios_tuple_tuple():
     assert compare_ratios((2, 4), (10, 20)) == approx(0.5)
     assert compare_ratios((7, 10), (2, 5)) == approx(0.15, abs=0.01)
+
+    assert compare_ratios((0, 10), (10, 20)) > 0.99
+    assert compare_ratios((10, 20), (10, 10)) > 0.99
