@@ -10,6 +10,8 @@ __pycache__/
 
 # C extensions
 *.so
+# ...but not those that are part of the package
+!/my/*.so
 
 # Distribution / packaging
 .Python

@@ -19,7 +19,7 @@ The `my.gil` module was written in C, therefore needs to be _built_ with:
 python setup.py build
 ```
 
-Then copy the resulting `build/*/gil.*.so` file to the `my/` package.
+Then copy the resulting `build/lib.*/gil.*.so` file to the `my/` package.
 
 ## Demos
 
