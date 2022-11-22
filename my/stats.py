@@ -1,3 +1,4 @@
+import scipy.integrate as integrate
 import scipy.stats as st
 
 
@@ -17,8 +18,16 @@ def compare_ratios(a: float | tuple[int, int], b: float | tuple[int, int]):
         case ((int(), int()), float()):
             return 1 - compare_ratios(b, a)
         case ((int(), int()), (int(), int())):
-            # TODO
-            raise NotImplementedError('comparing two tuples is not implemented yet')
+            a_success, a_total = a
+            b_success, b_total = b
+            return 1 - integrate.quad(
+                lambda x: (
+                    st.beta.pdf(x, a_success + 1, a_total - a_success + 1)
+                    * st.beta.cdf(x, b_success + 1, b_total - b_success + 1)
+                ),
+                0.0,
+                1.0,
+            )[0]
         case _:
             raise TypeError(
                 'Every argument of compare_ratios must be either a float or a pair of integers.'
