@@ -8,7 +8,9 @@ def compare_ratios(a: float | tuple[int, int], b: float | tuple[int, int]):
     tuple of ints, representing (number of successes, total number of events),
     assuming a uniform prior.
     """
-    if isinstance(a, float) and isinstance(b, tuple):
+    if isinstance(a, float) and isinstance(b, float):
+        return 0.5 if a == b else float(a < b)
+    elif isinstance(a, float) and isinstance(b, tuple):
         return st.beta.sf(a, b[0] + 1, b[1] - b[0] + 1)
     elif isinstance(b, float) and isinstance(a, tuple):
         return 1 - compare_ratios(b, a)
