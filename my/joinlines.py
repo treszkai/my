@@ -43,7 +43,7 @@ def load_words() -> set[str]:
         return {line.strip() for line in f}
 
 
-def read_text() -> list[str]:
+def qread_text() -> list[str]:
     """Read text either from stdin or from clipboard, whichever comes first"""
     initial_clipboard = clipboard.read()
     print('Enter text or copy to clipboard:')
@@ -72,7 +72,14 @@ def process_lines(raw_lines: list[str], words: set[str]) -> str:
     for line1, line2 in pairwise(chain(raw_lines, [''])):
         if line1.endswith("-"):
             word1 = line1.split()[-1]
-            word2 = line2.split()[0]
+            try:
+                word2 = line2.split()[0]
+            except IndexError:
+                # next line is empty
+                add_line(line1, lines, use_space)
+                use_space = True
+                continue
+
             if word1 + word2 in words:
                 add_line(line1, lines, use_space)
             else:
