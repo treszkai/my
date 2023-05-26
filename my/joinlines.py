@@ -5,6 +5,32 @@ import select
 import sys
 
 
+class Clipboard:
+    def read(self):
+        ...
+
+    def write(self, text: str) -> None:
+        ...
+
+
+class LinuxClipboard(Clipboard):
+    def read(self) -> str:
+        return subprocess.run(
+            ['xclip', '-selection', 'clipboard', '-o'], text=True, capture_output=True
+        ).stdout
+
+    def write(self, text: str):
+        subprocess.run(['xclip', '-selection', 'clipboard', '-i'], text=True, input=text)
+
+
+class MacClipboard(Clipboard):
+    def read(self) -> str:
+        return subprocess.run(['pbpaste'], text=True, capture_output=True).stdout
+
+    def write(self, text) -> str:
+        subprocess.run(['pbcopy'], text=True, input=text)
+
+
 def add_line(line: str, lines: list[str], use_space: bool):
     if use_space:
         lines.append(line)
@@ -17,15 +43,9 @@ def load_words() -> set[str]:
         return {line.strip() for line in f}
 
 
-def read_clipboard() -> str:
-    return subprocess.run(
-        ['xclip', '-selection', 'clipboard', '-o'], text=True, capture_output=True
-    ).stdout
-
-
 def read_text() -> list[str]:
     """Read text either from stdin or from clipboard, whichever comes first"""
-    initial_clipboard = read_clipboard()
+    initial_clipboard = clipboard.read()
     print('Enter text or copy to clipboard:')
 
     while True:
@@ -35,7 +55,7 @@ def read_text() -> list[str]:
             x = sys.stdin.read()
             break
         else:
-            x = read_clipboard()
+            x = clipboard.read()
             if x != initial_clipboard:
                 print("Copied from clipboard:")
                 print(x)
@@ -68,7 +88,7 @@ def process_lines(raw_lines: list[str], words: set[str]) -> str:
 
 
 def handle_text(text):
-    subprocess.run(['xclip', '-selection', 'clipboard', '-i'], text=True, input=text)
+    clipboard.write(text)
 
     print('\nCopied to clipboard:\n>>>\n')
     print(text)
@@ -76,8 +96,6 @@ def handle_text(text):
 
 
 def run():
-    # TODO check if Linux / Mac / Windows / else
-
     words = load_words()
 
     while True:
@@ -87,6 +105,14 @@ def run():
             break
         text = process_lines(raw_lines, words)
         handle_text(text)
+
+
+if sys.platform.startswith('linux'):
+    clipboard = LinuxClipboard()
+elif sys.platform.startswith('darwin'):
+    clipboard = MacClipboard()
+else:
+    raise NotImplementedError('Clipboard functionality implemented only for Linux and MacOS')
 
 
 if __name__ == '__main__':
