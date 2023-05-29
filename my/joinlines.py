@@ -43,7 +43,7 @@ def load_words() -> set[str]:
         return {line.strip() for line in f}
 
 
-def qread_text() -> list[str]:
+def read_text() -> list[str]:
     """Read text either from stdin or from clipboard, whichever comes first"""
     initial_clipboard = clipboard.read()
     print('Enter text or copy to clipboard:')
