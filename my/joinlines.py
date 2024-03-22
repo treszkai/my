@@ -88,8 +88,12 @@ def process_lines(raw_lines: list[str], words: set[str]) -> str:
             use_space = False
 
         else:
-            add_line(line1, lines, use_space)
-            use_space = True
+            if line1.strip() != "":
+                add_line(line1, lines, use_space)
+                use_space = True
+            else:
+                # empty line, ignore
+                pass
 
     return ' '.join(lines)
 
