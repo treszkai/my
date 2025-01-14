@@ -82,7 +82,7 @@ rot13('abzABZ 123') == 'nomNOM 123'
 ```
 
 #### My `acquire_gil`:
-(Only available on certain platforms.)
+(Only available on certain platforms, and after [building the package](#building-the-package).)
 
 ```python
 from my import acquire_gil
