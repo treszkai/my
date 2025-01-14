@@ -23,7 +23,8 @@ Then copy the resulting `build/lib.*/gil.*.so` file to the `my/` package.
 
 ## Demos
 
-My Pickle dump and load:
+#### My Pickle dump and load:
+
 ```python
 import my
 
@@ -33,7 +34,8 @@ x = my.load('shrugs.pickle')
 assert x == shrugs
 ```
 
-My Pickle load or do:
+#### My Pickle load or do:
+
 ```python
 func_called = 0
 def calc_big():
@@ -49,7 +51,7 @@ assert func_called == 1
 assert n == m
 ```
 
-My maybe:
+#### My maybe:
 ```python
 from my import maybe
 
@@ -62,7 +64,7 @@ n = maybe(int)(s)      # None (ValueError suppressed)
 sq = maybe(square)(n)  # None
 ```
 
-My `math`:
+#### My `math`:
 
 ```python
 from my import math
@@ -71,7 +73,7 @@ math.sin(math.pi / 4) == math.dsin(45)   # True
 math.r(90) == math.pi / 2                # True
 ```
 
-My `rot13`:
+#### My `rot13`:
 
 ```python
 from my import rot13
@@ -79,7 +81,8 @@ from my import rot13
 rot13('abzABZ 123') == 'nomNOM 123'
 ```
 
-My `acquire_gil` (only available on certain platforms):
+#### My `acquire_gil`:
+(Only available on certain platforms.)
 
 ```python
 from my import acquire_gil
@@ -87,7 +90,7 @@ from my import acquire_gil
 acquire_gil(2)  # Acquires the GIL and holds it for 2 seconds
 ```
 
-My `jupyter` widgets:
+#### My `jupyter` widgets:
 
 ```python
 from my import jupyter
@@ -99,7 +102,9 @@ l = jupyter.Leafer(range(10,20,3)); l()
 [l.data[i] for i in l.marked_idxs]
 ```
 
-My `pandas` `DataFrame` accessor `Q` (just a shorthand for `query`):
+#### My Pandas `DataFrame` accessor `Q`:
+
+(Just a shorthand for `DataFrame.query`.)
 
 ```python
 >>> import pandas as pd
